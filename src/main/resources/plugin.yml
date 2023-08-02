@@ -1,4 +1,6 @@
-name: myplugin
+name: reacharound
 version: ${project.version}
-author: Your Name
-main: dev.jkm.myplugin.MyPlugin
+author: jkm
+main: dev.jkm.reacharound.ReachAroundPlugin
+
+api-version: 1.14

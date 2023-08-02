@@ -1,10 +1,10 @@
-# mc-spigot-template
+# reacharound
 
-This is a template for creating a Spigot plugin for Minecraft.
+World border that wraps around to the other side.
 
 ## Installation
 
-1. Download the latest release from the [releases page](https://github.com/jkm-mc/mc-myplugin/releases).
+1. Download the latest release from the [releases page](https://github.com/jkm-mc/reacharound/releases).
 2. Place the downloaded JAR file in your server's `plugins` directory.
 
 ## Configuration
@@ -14,8 +14,6 @@ _Add information about plugin configuration here._
 ## Commands
 
 _Add information about plugin commands here._
-
-- `/somecommand` - Command description.
 
 ## Development
 

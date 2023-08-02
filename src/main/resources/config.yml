@@ -1,0 +1,12 @@
+﻿# The corners of the world border
+bounds: 
+  minX: -1000
+  minZ: -1000
+  maxX: 1000
+  maxZ: 1000
+
+# The distance in chunks on the other side to pre-load when a player is near the border
+preload-chunk-distance: 3
+
+# The interval in milliseconds to check for players near the border
+check-interval: 1000
