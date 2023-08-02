@@ -24,6 +24,8 @@ public class ReachAroundPlugin extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        saveDefaultConfig();
+
         FileConfiguration config = getConfig();
 
         configuration = Configuration.load(config);
