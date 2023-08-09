@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -87,6 +88,18 @@ public class ReachAroundPlugin extends JavaPlugin implements Listener {
         }        
     
         if (hasChanged) {
+            teleportPlayerAndVehicle(player, to);
+        }
+    }
+
+    private void teleportPlayerAndVehicle(Player player, Location to) {
+        if (player.isInsideVehicle()) {
+            Entity vehicle = player.getVehicle(); // This could be a horse, minecart, or boat
+            player.leaveVehicle();
+            vehicle.teleport(to);
+            player.teleport(to);
+            vehicle.setPassenger(player);
+        } else {
             player.teleport(to);
         }
     }
