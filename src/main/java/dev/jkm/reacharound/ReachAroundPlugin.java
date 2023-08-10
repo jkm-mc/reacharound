@@ -68,7 +68,7 @@ public class ReachAroundPlugin extends JavaPlugin implements Listener {
     private void teleportForBorderIfNecessary(Player player, Location to, int maxX, int maxZ) {
         boolean hasChanged = false;
 
-        if (to.getBlockX() > maxX) {
+        if (to.getBlockX() >= maxX) {
             to.setX(0);
             hasChanged = true;
         } else if (to.getBlockX() < 0) {
@@ -76,7 +76,7 @@ public class ReachAroundPlugin extends JavaPlugin implements Listener {
             hasChanged = true;
         }
         
-        if (to.getBlockZ() > maxZ) {
+        if (to.getBlockZ() >= maxZ) {
             to.setZ(0);
             hasChanged = true;
         } else if (to.getBlockZ() < 0) {
