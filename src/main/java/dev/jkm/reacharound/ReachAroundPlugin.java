@@ -67,25 +67,28 @@ public class ReachAroundPlugin extends JavaPlugin implements Listener {
      */
     private void teleportForBorderIfNecessary(Player player, Location to, int maxX, int maxZ) {
         boolean hasChanged = false;
+        double offsetX = to.getX();
+        double offsetZ = to.getZ();
 
         if (to.getBlockX() >= maxX) {
-            to.setX(0);
+            to.setX(offsetX - maxX);
             hasChanged = true;
         } else if (to.getBlockX() < 0) {
-            to.setX(maxX);
+            to.setX(maxX + offsetX);
             hasChanged = true;
         }
         
         if (to.getBlockZ() >= maxZ) {
-            to.setZ(0);
+            to.setZ(offsetZ - maxZ);
             hasChanged = true;
         } else if (to.getBlockZ() < 0) {
-            to.setZ(maxZ);
+            to.setZ(maxZ + offsetZ);
             hasChanged = true;
         }        
-    
+        
         if (hasChanged) {
             teleportPlayerAndVehicle(player, to);
+            // TODO persist the player's velocity across the border
         }
     }
 
