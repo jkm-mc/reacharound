@@ -21,15 +21,12 @@ public class ReachAroundPlugin extends JavaPlugin implements Listener {
      */
     private HashMap<UUID, Long> lastCheckTime = new HashMap<>();
 
-    private Configuration configuration;
-
     @Override
     public void onEnable() {
         saveDefaultConfig();
 
         FileConfiguration config = getConfig();
-
-        configuration = Configuration.load(config);
+        Configuration.load(config);
 
         getServer().getPluginManager().registerEvents(this, this);
     }
@@ -42,7 +39,7 @@ public class ReachAroundPlugin extends JavaPlugin implements Listener {
 
         // Check if enough time has passed since the last check for this player
         if (lastCheckTime.containsKey(playerUUID) &&
-                currentTime - lastCheckTime.get(playerUUID) < configuration.checkInterval) {
+                currentTime - lastCheckTime.get(playerUUID) < Configuration.checkInterval) {
             return;
         }
 
@@ -54,7 +51,7 @@ public class ReachAroundPlugin extends JavaPlugin implements Listener {
         int maxX = getMaxX(world);
         int maxZ = getMaxZ(world);
 
-        if (configuration.preloadChunkDistance > 0) {
+        if (Configuration.preloadChunkDistance > 0) {
             preloadChunks(world, to, maxX, maxZ);
         }
 
@@ -113,9 +110,9 @@ public class ReachAroundPlugin extends JavaPlugin implements Listener {
         String worldName = world.getName();
 
         if (worldName.equals("world")) {
-            return configuration.bounds.maxX;
+            return Configuration.bounds.maxX;
         } else if (worldName.equals("world_nether")) {
-            return configuration.bounds.maxX / 8;
+            return Configuration.bounds.maxX / 8;
         }
         
         return -1;
@@ -130,9 +127,9 @@ public class ReachAroundPlugin extends JavaPlugin implements Listener {
         String worldName = world.getName();
 
         if (worldName.equals("world")) {
-            return configuration.bounds.maxZ;
+            return Configuration.bounds.maxZ;
         } else if (worldName.equals("world_nether")) {
-            return configuration.bounds.maxZ / 8;
+            return Configuration.bounds.maxZ / 8;
         }
         
         return -1;
@@ -150,26 +147,26 @@ public class ReachAroundPlugin extends JavaPlugin implements Listener {
         int chunkX = loc.getBlockX() >> 4;
         int chunkZ = loc.getBlockZ() >> 4;
     
-        if (chunkX >= (maxX >> 4) - configuration.preloadChunkDistance) {
-            for (int z = -configuration.preloadChunkDistance; z <= configuration.preloadChunkDistance; z++) {
+        if (chunkX >= (maxX >> 4) - Configuration.preloadChunkDistance) {
+            for (int z = -Configuration.preloadChunkDistance; z <= Configuration.preloadChunkDistance; z++) {
                 world.getChunkAt(0, chunkZ + z).load();
             }
         }
     
-        if (chunkX <= configuration.preloadChunkDistance) {
-            for (int z = -configuration.preloadChunkDistance; z <= configuration.preloadChunkDistance; z++) {
+        if (chunkX <= Configuration.preloadChunkDistance) {
+            for (int z = -Configuration.preloadChunkDistance; z <= Configuration.preloadChunkDistance; z++) {
                 world.getChunkAt((maxX >> 4), chunkZ + z).load();
             }
         }
     
-        if (chunkZ >= (maxZ >> 4) - configuration.preloadChunkDistance) {
-            for (int x = -configuration.preloadChunkDistance; x <= configuration.preloadChunkDistance; x++) {
+        if (chunkZ >= (maxZ >> 4) - Configuration.preloadChunkDistance) {
+            for (int x = -Configuration.preloadChunkDistance; x <= Configuration.preloadChunkDistance; x++) {
                 world.getChunkAt(chunkX + x, 0).load();
             }
         }
     
-        if (chunkZ <= configuration.preloadChunkDistance) {
-            for (int x = -configuration.preloadChunkDistance; x <= configuration.preloadChunkDistance; x++) {
+        if (chunkZ <= Configuration.preloadChunkDistance) {
+            for (int x = -Configuration.preloadChunkDistance; x <= Configuration.preloadChunkDistance; x++) {
                 world.getChunkAt(chunkX + x, (maxZ >> 4)).load();
             }
         }
