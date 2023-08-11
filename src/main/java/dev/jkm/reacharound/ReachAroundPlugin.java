@@ -51,6 +51,10 @@ public class ReachAroundPlugin extends JavaPlugin implements Listener {
         int maxX = getMaxX(world);
         int maxZ = getMaxZ(world);
 
+        if (maxX == -1 || maxZ == -1) {
+            return;
+        }
+
         if (Configuration.preloadChunkDistance > 0) {
             preloadChunks(world, to, maxX, maxZ);
         }
